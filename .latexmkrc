@@ -57,12 +57,19 @@ add_cus_dep('ntn', 'not', 0, 'run_makeglossaries');
 add_cus_dep('stn', 'sot', 0, 'run_makeglossaries');
 
 sub run_makeglossaries {
-  if ( $silent ) {
-    system "makeglossaries", "-q", $_[0];
-  }
-  else {
-    system "makeglossaries", $_[0];
-  };
+    # https://ipfs-sec.stackexchange.cloudflare-ipfs.com/tex/A/question/58963.html
+
+    my ($base_name, $path) = fileparse( $_[0] );
+    pushd $path;
+
+    if ( $silent ) {
+        system 'makeglossaries', '-q', $base_name;
+    }
+    else {
+        system 'makeglossaries', $base_name;
+    };
+
+    popd;
 }
 
 #------------------------------------------------------------------------------#
