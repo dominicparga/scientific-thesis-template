@@ -15,6 +15,10 @@ $out_dir = 'build';
 
 ensure_path('TEXINPUTS', './styles//');
 
+# replaces main.pdf by jobname.pdf
+# May cause, that -pvc won't find pdf (but preview-section below is working).
+# $jobname = 'balancing-paper';
+
 #------------------------------------------------------------------------------#
 # use lualatex
 
@@ -29,12 +33,16 @@ $pdf_mode = 4;
 
 #------------------------------------------------------------------------------#
 # preview
+# You may put this info in ~/.latexmkrc
 
-# =0 <-> no preview
-# >0 <-> preview
-$preview_mode = 0;
+# >0 <-> equivalent to -pv
+#$preview_mode = 0;
+# >0 <-> equivalent to -pvc
+#$preview_continuous_mode = 1;
 
-$view = 'default';
+#$view = 'pdf';
+# 'evince' is 'Document Viewer' (Gnome's default)
+#$pdf_previewer = 'evince';
 
 #------------------------------------------------------------------------------#
 # bib-files
@@ -76,4 +84,6 @@ sub run_makeglossaries {
 # remove more files than in the default configuration
 
 @generated_exts = qw(acn acr alg aux code ist fls glg glo gls glsdefs idx ind lof lot out thm toc tpt wrt);
+# push @generated_exts, 'glo', 'gls', 'glg';
+# push @generated_exts, 'acn', 'acr', 'alg';
 $clean_ext .= ' %R.ist %R.xdy';
