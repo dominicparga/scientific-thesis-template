@@ -13,9 +13,9 @@ name: latexmk
 on:
   push:
   pull_request:
-  schedule:
+  #schedule:
   # every Monday at 6:00
-  - cron: '0 6 * * 1'
+  #- cron: '0 6 * * 1'
 jobs:
   build_and_upload_pdf:
     runs-on: ubuntu-latest
